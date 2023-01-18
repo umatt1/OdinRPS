@@ -63,12 +63,21 @@ function doRound(playerSelection, computerSelection) {
         return;
     }
 }
-
-function game() {
-    for (let i = 0; i < 5; i++) {
-        alert(doRound(prompt("Rock, paper, or scissors?", getComputerChoice())));
-        alert(`${playerScore}:${computerScore}`);
+document.querySelectorAll(".choice").forEach(
+    (k) => k.addEventListener("click", function(evt){game(evt.currentTarget.id)})
+);
+function game(playerChoice) {
+    if (playerScore == 5) {
+        document.querySelector("#results").innerHTML = "Player wins!";
+    } else if (computerScore == 5) {
+        document.querySelector("#results").innerHTML = "Computer wins!";
+    } else {
+        roundText = doRound(playerChoice, getComputerChoice())
+        document.querySelector("#results").innerHTML = roundText + "\n" + `${playerScore}:${computerScore}`;
+        if (playerScore == 5) {
+            document.querySelector("#results").innerHTML = "Player wins!";
+        } else if (computerScore == 5) {
+            document.querySelector("#results").innerHTML = "Computer wins!";
+        }
     }
 }
-
-game();
